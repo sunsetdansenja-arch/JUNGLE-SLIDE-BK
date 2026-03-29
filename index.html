@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,54 +9,47 @@
         /* --- CSS VARIABLES & RESET --- */
         :root {
             --white: #FFFFFF;
-            --black: #1A1A1A;
+            --black: #121212;
             --blue: #0056B3; 
+            --deep-blue: #003366; 
+            --soft-blue: #E8F1F8; 
             --orange: #FF6B00; 
             --font-main: 'Inter', sans-serif;
             --transition-speed: 0.6s;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        html, body {
+            margin: 0; padding: 0; width: 100%; max-width: 100vw;
+            overflow-x: hidden; 
             font-family: var(--font-main);
+            background-color: var(--white);
+            color: var(--black);
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            padding-bottom: 70px; /* Space for bottom nav */
+            padding-bottom: 80px; 
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- ARTISTIC ELEMENTS (SCRIBBLES) --- */
-        .scribble-bg {
-            position: absolute;
-            opacity: 0.2;
-            pointer-events: none;
-            z-index: 0;
+        * { box-sizing: border-box; }
+
+        /* --- ARTISTIC ELEMENTS --- */
+        .scribble-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none; z-index: 0;
         }
 
-        /* Whale Shark Scribble */
         .ws-scribble {
-            top: 5%;
-            right: -20px;
-            width: 180px;
-            height: 120px;
+            position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%230056B3" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
+            opacity: 0.15;
         }
 
-        /* Turtle Scribble */
         .turtle-scribble {
-            top: -20px;
-            left: -20px;
-            width: 120px;
-            height: 100px;
+            position: absolute; top: 10px; left: -20px; width: 120px; height: 100px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path d="M40,10 Q60,10 70,40 Q60,70 40,70 Q20,70 10,40 Q20,10 40,10 Z M25,25 L35,35 M55,25 L45,35 M25,55 L35,45 M55,55 L45,45" stroke="%23FF6B00" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
+            opacity: 0.15;
         }
 
         .scribble-border {
@@ -65,205 +58,107 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        h1 { font-size: 2.2rem; font-weight: 800; color: var(--blue); line-height: 1.2; margin-bottom: 10px; }
-        h2 { font-size: 1.8rem; font-weight: 700; color: var(--blue); margin-bottom: 15px; }
-        h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: var(--black); }
-        p { font-size: 0.95rem; color: #555; margin-bottom: 20px; }
+        h1 { font-size: 2.2rem; font-weight: 800; color: var(--blue); line-height: 1.2; margin-bottom: 12px; }
+        h2 { font-size: 1.8rem; font-weight: 800; color: var(--blue); margin-bottom: 15px; }
+        h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+        p { font-size: 0.95rem; color: #444; margin-bottom: 20px; }
+        
         .highlight { color: var(--orange); position: relative; display: inline-block; }
         .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 6px;
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 6px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FF6B00" fill="none" stroke-width="3"/></svg>') no-repeat center/contain;
         }
 
         /* --- BUTTONS --- */
         .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background-color: var(--orange);
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            position: relative;
-            transition: transform 0.2s ease;
-            z-index: 1;
-            border: 2px solid var(--black);
-            border-radius: 50px 20px 50px 20px / 20px 50px 20px 50px;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
+            display: inline-block; padding: 16px 32px; background-color: var(--orange);
+            color: var(--white); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            font-size: 0.95rem; position: relative; z-index: 1;
+            border: 2px solid var(--black); border-radius: 50px 20px 50px 20px / 20px 50px 20px 50px;
+            cursor: pointer; width: 100%; text-align: center;
+            box-shadow: 3px 4px 0px var(--black); transition: all 0.1s ease;
         }
-        .btn:active { transform: scale(0.95); }
+        .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--black); }
 
         .btn-small {
-            display: inline-block;
-            margin-top: auto;
-            padding: 10px 20px;
-            background-color: transparent;
-            color: var(--blue);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid var(--blue);
-            border-radius: 20px 5px 20px 5px / 5px 20px 5px 20px;
-            width: 100%;
+            display: inline-block; margin-top: auto; padding: 12px 20px; background-color: transparent;
+            color: var(--blue); font-weight: 700; font-size: 0.85rem; cursor: pointer;
+            border: 2px solid var(--blue); border-radius: 20px 5px 20px 5px / 5px 20px 5px 20px;
+            width: 100%; transition: all 0.2s ease;
         }
-        .btn-small:hover, .btn-small:active {
-            background-color: var(--blue);
-            color: var(--white);
-        }
+        .btn-small:hover, .btn-small:active { background-color: var(--blue); color: var(--white); }
 
         /* --- LAYOUT UTILITIES --- */
         section {
-            padding: 60px 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 80px 20px; position: relative; display: flex; flex-direction: column;
+            justify-content: center; overflow: hidden;
         }
         
         .img-fluid {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 2px solid var(--black);
+            width: 100%; height: 240px; object-fit: cover; border-radius: 10px;
+            margin-bottom: 25px; border: 2px solid var(--black); box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
         }
 
-        /* --- REVEAL ANIMATION --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all var(--transition-speed) ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(20px); transition: all var(--transition-speed) ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- SPECIFIC SECTIONS --- */
-        #hero { text-align: center; padding-top: 40px; min-height: 90vh; justify-content: flex-start;}
-        
-        .logo-wrap { margin-bottom: 30px; }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--black);
-            display: inline-block;
-            position: relative;
-        }
+        /* --- SECTIONS --- */
+        #hero { background-color: var(--white); padding-top: 50px; text-align: center; }
+        .logo-wrap { margin-bottom: 25px; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--black); display: inline-block; position: relative; }
         .logo::after {
-            content: 'BK';
-            font-size: 0.8rem;
-            background: var(--orange);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            position: absolute;
-            top: -5px;
-            right: -30px;
+            content: 'BK'; font-size: 0.75rem; background: var(--orange); color: white;
+            padding: 2px 6px; border-radius: 4px; position: absolute; top: -5px; right: -30px;
         }
 
-        #services { background-color: #F8FBFF; overflow: hidden; }
-        
+        #services { background-color: var(--soft-blue); border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
         .services-carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding: 10px 0 20px 0;
-            -webkit-overflow-scrolling: touch;
-            margin: 0 -20px; /* Pull out of padding */
-            padding-left: 20px;
-            padding-right: 20px;
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px;
+            padding: 10px 0 30px 0; -webkit-overflow-scrolling: touch;
+            width: calc(100% + 40px); margin-left: -20px; padding-left: 20px; padding-right: 20px;
         }
         .services-carousel::-webkit-scrollbar { display: none; }
-
         .service-card {
-            flex: 0 0 75%;
-            scroll-snap-align: center;
-            background: var(--white);
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            position: relative;
-            min-height: 220px;
-            box-shadow: 0 10px 30px rgba(0,86,179,0.05);
+            flex: 0 0 85%; scroll-snap-align: center; background: var(--white); padding: 25px 20px;
+            display: flex; flex-direction: column; text-align: left; position: relative;
+            min-height: 240px; box-shadow: 3px 4px 0px rgba(0,86,179,0.15);
         }
-        
-        .service-card h3 { color: var(--blue); }
-        .service-card p { font-size: 0.85rem; margin-bottom: 15px; }
-        
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+        .service-card h3 { color: var(--deep-blue); }
+        .card-icon { font-size: 2.2rem; margin-bottom: 12px; }
 
-        #about { background-color: var(--blue); color: var(--white); text-align: center; }
-        #about h2, #about p { color: var(--white); }
-        
-        .toti-profile { position: relative; margin: 0 auto 30px auto; display: inline-block; }
-        .toti-img {
-            width: 140px; height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--white);
-            position: relative;
-            z-index: 2;
-        }
+        #about { background-color: var(--deep-blue); color: var(--white); text-align: center; padding-top: 100px; padding-bottom: 100px; }
+        #about h2 { color: var(--white); margin-bottom: 20px;}
+        #about p { color: rgba(255,255,255,0.9); font-size: 1rem;}
+        .toti-profile { position: relative; margin: 0 auto 35px auto; display: inline-block; }
+        .toti-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); position: relative; z-index: 2; }
         .toti-frame {
-            position: absolute;
-            top: -8px; left: -8px;
-            width: 156px; height: 156px;
-            border: 3px solid var(--orange);
-            border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
-            z-index: 1;
+            position: absolute; top: -10px; left: -10px; width: 170px; height: 170px;
+            border: 3px solid var(--orange); border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%; z-index: 1;
         }
 
-        #booking { text-align: center; padding-bottom: 100px; }
-        #booking .ws-scribble { bottom: 10px; top: auto; left: 50%; transform: translateX(-50%) rotate(-10deg); opacity: 0.1; width: 250px;}
+        #booking { background-color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 120px; }
+        #booking .ws-scribble { bottom: 20px; top: auto; left: 50%; transform: translateX(-50%) rotate(-5deg); opacity: 0.1; width: 200px;}
 
         /* --- STICKY BOTTOM NAV --- */
         .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 70px;
-            background-color: var(--white);
-            display: flex; justify-content: space-around; align-items: center;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
-            z-index: 100;
-            border-top: 2px solid var(--black);
-            border-radius: 20px 20px 0 0;
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background-color: var(--white);
+            display: flex; justify-content: space-around; align-items: center; z-index: 100;
+            border-top: 2px solid var(--black); border-radius: 20px 20px 0 0;
+            padding-bottom: env(safe-area-inset-bottom);
         }
         .nav-item {
-            text-decoration: none; color: #888;
-            font-size: 0.75rem; font-weight: 600;
-            display: flex; flex-direction: column; align-items: center;
-            transition: color 0.2s;
+            text-decoration: none; color: #777; font-size: 0.75rem; font-weight: 700;
+            display: flex; flex-direction: column; align-items: center; transition: color 0.2s; width: 20%;
         }
         .nav-item.active { color: var(--blue); }
-        .nav-icon { font-size: 1.4rem; margin-bottom: 3px; font-style: normal;}
-        
+        .nav-icon { font-size: 1.5rem; margin-bottom: 4px; font-style: normal;}
         .nav-cta {
-            background-color: var(--orange);
-            color: var(--white);
-            width: 65px; height: 65px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin-top: -35px;
-            border: 2px solid var(--black);
-            text-decoration: none;
+            background-color: var(--orange); color: var(--white); width: 65px; height: 65px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-top: -40px;
+            border: 2px solid var(--black); text-decoration: none; box-shadow: 0 4px 10px rgba(255,107,0,0.4);
+            transition: transform 0.2s ease;
         }
+        .nav-cta:active { transform: scale(0.9); }
         .nav-cta .nav-icon { font-size: 1.8rem; margin: 0; color: white;}
     </style>
 </head>
@@ -280,7 +175,7 @@
     <main>
         
         <section id="hero">
-            <div class="scribble-bg ws-scribble"></div>
+            <div class="scribble-wrapper"><div class="ws-scribble"></div></div>
             
             <div class="logo-wrap reveal active">
                 <div class="logo">Jungle Slide</div>
@@ -290,13 +185,13 @@
                 <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop" alt="Surfing Batu Karas" class="img-fluid scribble-border">
                 
                 <h1>Your <span class="highlight">Batu Karas</span> Adventure.</h1>
-                <p>Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real vibe of the ocean.</p>
+                <p>Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real ocean vibe.</p>
                 <button onclick="bookService('General Inquiry')" class="btn">Plan Your Trip</button>
             </div>
         </section>
 
         <section id="services">
-            <div class="scribble-bg turtle-scribble"></div>
+            <div class="scribble-wrapper"><div class="turtle-scribble"></div></div>
             
             <div class="reveal">
                 <h2>Our Services</h2>
@@ -351,12 +246,12 @@
                 </div>
                 <h2>Meet Uncle Toti.</h2>
                 <p>Jungle Slide BK isn't just a service; it's a piece of Batu Karas history. Founded and run by Uncle Toti, a local surfing legend, we are dedicated to providing an authentic experience.</p>
-                <p>With years of showing travelers the magic of our beaches, Toti ensures safety, fun, and true Indonesian hospitality. Let a true local guide your adventure.</p>
+                <p>With years of showing travelers the magic of our beaches, Toti ensures safety, fun, and true Indonesian hospitality.</p>
             </div>
         </section>
 
         <section id="booking">
-            <div class="scribble-bg ws-scribble"></div>
+            <div class="scribble-wrapper"><div class="ws-scribble"></div></div>
             
             <div class="reveal">
                 <h2>Ready to Slide?</h2>
@@ -375,17 +270,19 @@
 
         window.addEventListener('scroll', () => {
             let current = '';
+            const scrollY = window.pageYOffset + 150; 
+            
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                     current = section.getAttribute('id');
                 }
             });
 
             navItems.forEach(item => {
                 item.classList.remove('active');
-                if (item.getAttribute('href') && item.getAttribute('href').includes(current)) {
+                if (item.getAttribute('href') === `#${current}`) {
                     item.classList.add('active');
                 }
             });
@@ -397,7 +294,7 @@
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100; 
+                const elementVisible = 50; 
                 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
@@ -407,23 +304,18 @@
         window.addEventListener('scroll', reveal);
         reveal(); // Trigger on load
 
-        // --- DYNAMIC WHATSAPP ROUTING ---
+        // --- DYNAMIC WHATSAPP ROUTING (ENGLISH VERSION) ---
         function bookService(serviceName) {
-            // Target Phone Number
             const phoneNumber = "6282315738183";
             let message = "";
 
-            // Logic to format message based on service clicked
             if (serviceName === 'General Inquiry') {
-                message = `Hi Uncle Toti! 🤙🏽\n\nSaya mau tanya-tanya dulu soal trip ke Batu Karas. Boleh minta info paket lengkapnya?`;
+                message = `Hi Uncle Toti! 🤙🏽\n\nI'm planning a trip to Batu Karas and have some general inquiries. Could I get more information about your packages?`;
             } else {
-                message = `Hi Uncle Toti! 🤙🏽\n\nSaya lihat di website dan tertarik untuk pesan layanan: *${serviceName}*.\n\nBoleh minta info detail harga dan ketersediaannya?`;
+                message = `Hi Uncle Toti! 🤙🏽\n\nI saw your website and I'm interested in booking the *${serviceName}*.\n\nCould you please provide more details on pricing and availability?`;
             }
 
-            // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
-            
-            // Redirect to WhatsApp
             window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
         }
     </script>
