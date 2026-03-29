@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jungle Slide BK - Batu Karas Adventure</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --white: #FFFFFF;
+            --black: #1A1A1A;
+            --blue: #0056B3; /* Trust, Ocean */
+            --orange: #FF6B00; /* Action, Energy */
+            --scribble-color: rgba(0, 86, 179, 0.2); /* Faint Blue for background scribbles */
+            --font-main: 'Inter', sans-serif; /* Clean Sans-Serif */
+            --transition-speed: 0.6s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- GLOBAL ARTISTIC ELEMENTS (SCRIBBLES) --- */
+        /* Placeholder for Marine Fauna Scribbles - In a real project, these would be SVGs */
+        .scribble-bg {
+            position: absolute;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Simulating a Whale Shark Scribble */
+        .ws-scribble {
+            top: 10%;
+            right: -50px;
+            width: 150px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%230056B3" fill="none" stroke-width="1" stroke-linecap="round"/></svg>') no-repeat center/contain;
+        }
+
+        /* Simulating a Turtle Scribble */
+        .turtle-scribble {
+            bottom: 15%;
+            left: -30px;
+            width: 100px;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path d="M40,10 Q60,10 70,40 Q60,70 40,70 Q20,70 10,40 Q20,10 40,10 Z M25,25 L35,35 M55,25 L45,35 M25,55 L35,45 M55,55 L45,45" stroke="%230056B3" fill="none" stroke-width="1" stroke-linecap="round"/></svg>') no-repeat center/contain;
+        }
+
+        /* Hand-drawn border effect class */
+        .scribble-border {
+            border: 2px solid var(--black);
+            border-radius: 15px 5px 15px 5px / 5px 15px 5px 15px; /* Irregular radius */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 { font-size: 2.5rem; font-weight: 800; color: var(--blue); line-height: 1.1; margin-bottom: 10px; }
+        h2 { font-size: 1.8rem; font-weight: 700; color: var(--blue); margin-bottom: 15px; }
+        h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 5px; }
+        p { font-size: 1rem; color: #555; margin-bottom: 20px; }
+        .highlight { color: var(--orange); position: relative; }
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FF6B00" fill="none" stroke-width="2"/></svg>') no-repeat center/contain;
+        }
+
+        /* --- BUTTONS & CTA --- */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--orange);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            transition: transform 0.2s ease;
+            z-index: 1;
+            /* Hand-drawn button effect */
+            border: 2px solid var(--black);
+            border-radius: 50px 20px 50px 20px / 20px 50px 20px 50px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- REVEAL ANIMATION ON SCROLL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================= */
+        /* --- SECTION SPECIFIC STYLES --- */
+        /* ========================================= */
+
+        /* 1. HERO SECTION */
+        #hero {
+            background-color: var(--white);
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        #hero .logo {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--black);
+            margin-bottom: 40px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        #hero .logo::after {
+            content: 'BK';
+            font-size: 0.7rem;
+            background: var(--orange);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+            position: absolute;
+            top: -10px;
+            right: -25px;
+        }
+
+        #hero h1 { margin-bottom: 20px; }
+        #hero .ws-scribble { top: 20%; opacity: 0.5; width: 200px;}
+
+        /* 2. SERVICES SECTION */
+        #services {
+            background-color: #F9F9F9; /* Very slight gray to distinguish */
+        }
+
+        .services-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 20px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .services-carousel::-webkit-scrollbar { display: none; }
+
+        .service-card {
+            flex: 0 0 80%; /* Show 80% of card, peek next */
+            scroll-snap-align: center;
+            background: var(--white);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            background-color: rgba(0, 86, 179, 0.1); /* Faint Blue */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--blue);
+            /* Icon Scribble accent */
+            border: 1.5px solid var(--blue);
+        }
+
+        /* 3. ABOUT SECTION (UNCLE TOTI) */
+        #about {
+            background-color: var(--blue);
+            color: var(--white);
+        }
+
+        #about h2, #about p { color: var(--white); }
+        
+        .toti-profile {
+            position: relative;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .toti-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Frame scribble around Toti */
+        .toti-frame {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 170px;
+            height: 170px;
+            border: 3px solid var(--orange);
+            border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
+            z-index: 1;
+        }
+
+        /* 4. BOOKING SECTION */
+        #booking {
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        /* Large Whale Shark Scribble at bottom */
+        #booking .ws-scribble {
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-10deg);
+            width: 250px;
+            height: 150px;
+            opacity: 0.2;
+        }
+
+        /* STICKY BOTTOM NAV (UX for high closing rate) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+            z-index: 100;
+            border-top: 1px solid #EEE;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #777;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            color: var(--blue);
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        /* Special Central CTA Button */
+        .nav-cta {
+            background-color: var(--orange);
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -30px; /* Float up */
+            box-shadow: 0 5px 15px rgba(255,107,0,0.3);
+            border: 2px solid var(--black);
+        }
+        
+        .nav-cta .nav-icon { font-size: 1.5rem; color: white; margin: 0;}
+
+        /* Icon fonts simulation */
+        [class^="icon-"] { font-family: sans-serif; font-style: normal; }
+        .icon-surf::before { content: '🏄🏽'; }
+        .icon-car::before { content: '🚗'; }
+        .icon-bike::before { content: '🛵'; }
+        .icon-board::before { content: '🛹'; }
+        .icon-up::before { content: '🛫'; }
+        .icon-drop::before { content: '🛬'; }
+        .icon-home::before { content: '🏠'; }
+        .icon-serv::before { content: '🛠️'; }
+        .icon-about::before { content: '👨🏽'; }
+        .icon-book::before { content: '🤙🏽'; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="bottom-nav">
+        <a href="#hero" class="nav-item active"><i class="icon-home nav-icon"></i>Home</a>
+        <a href="#services" class="nav-item"><i class="icon-serv nav-icon"></i>Services</a>
+        <a href="#booking" class="nav-cta"><i class="icon-book nav-icon"></i></a>
+        <a href="#about" class="nav-item"><i class="icon-about nav-icon"></i>Uncle Toti</a>
+        <a href="#booking" class="nav-item"><i class="icon-book nav-icon"></i>Book</a>
+    </nav>
+
+    <main>
+        
+        <section id="hero">
+            <div class="scribble-bg ws-scribble"></div>
+            <div class="logo">Jungle Slide</div>
+            
+            <div class="reveal active">
+                <h1>Your <span class="highlight">Batu Karas</span> Adventure.</h1>
+                <p>Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real vibe.</p>
+                <a href="#booking" class="btn">Let's Ride</a>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="scribble-bg turtle-scribble"></div>
+            
+            <div class="reveal">
+                <h2>Our Vibe</h2>
+                <p>Everything you need for the perfect trip, hand-picked and guide-approved.</p>
+            </div>
+
+            <div class="services-carousel reveal">
+                <div class="service-card scribble-border">
+                    <div class="service-icon"><i class="icon-surf"></i></div>
+                    <h3>Surf Guide</h3>
+                    <p>Find secret spots & catch the best waves.</p>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="service-icon"><i class="icon-car"></i></div>
+                    <h3>Car Rent</h3>
+                    <p>Comfortable rides for group trips.</p>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="service-icon"><i class="icon-bike"></i></div>
+                    <h3>Bike Rent</h3>
+                    <p>Explore the coastline freely.</p>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="service-icon"><i class="icon-board"></i></div>
+                    <h3>Board Rent</h3>
+                    <p>Premium surfboards for all levels.</p>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="service-icon"><i class="icon-up"></i></div>
+                    <h3>Airport Pick Up</h3>
+                    <p>Hassle-free transfer to BK.</p>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="service-icon"><i class="icon-drop"></i></div>
+                    <h3>Airport Drop</h3>
+                    <p>Safe return to your flight.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="reveal text-center">
+                <div class="toti-profile">
+                    <img src="https://via.placeholder.com/150" alt="Uncle Toti" class="toti-img">
+                    <div class="toti-frame"></div>
+                </div>
+                <h2>Meet Uncle Toti.</h2>
+                <p>Jungle Slide BK isn't just a service; it's a piece of Batu Karas history. Founded and run by Uncle Toti, a local surfing legend and certified guide, we are dedicated to providing an authentic experience.</p>
+                <p>With 15+ years showing travelers the magic of our beaches, Toti ensures safety, fun, and true Indonesian hospitality.</p>
+            </div>
+        </section>
+
+        <section id="booking">
+            <div class="scribble-bg ws-scribble"></div>
+            
+            <div class="reveal">
+                <h1>Ready to Slide?</h1>
+                <p>Tap below to chat directly with <span class="highlight">Uncle Toti</span> on WhatsApp. Plan your trip, ask questions, or secure your booking instantly.</p>
+                <br>
+                <a href="https://wa.me/yourphonenumber" class="btn">Chat on WhatsApp</a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- UX: Active Nav State on Scroll ---
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').includes(current)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // --- UX: Scroll Reveal Animation ---
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150; // trigger point
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        // Initial check on load
+        reveal();
+
+    </script>
+</body>
+</html>
