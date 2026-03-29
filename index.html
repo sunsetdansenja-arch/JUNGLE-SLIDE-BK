@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jungle Slide BK - Batu Karas Adventure</title>
+    
+    <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/logo%20uncle.jpg">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- CSS VARIABLES & RESET --- */
@@ -95,7 +98,7 @@
         }
         
         .img-fluid {
-            width: 100%; height: 240px; object-fit: cover; border-radius: 10px;
+            width: 100%; height: 260px; object-fit: cover; border-radius: 10px;
             margin-bottom: 25px; border: 2px solid var(--black); box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
         }
 
@@ -104,11 +107,12 @@
 
         /* --- SECTIONS --- */
         #hero { background-color: var(--white); padding-top: 50px; text-align: center; }
-        .logo-wrap { margin-bottom: 25px; }
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--black); display: inline-block; position: relative; }
-        .logo::after {
-            content: 'BK'; font-size: 0.75rem; background: var(--orange); color: white;
-            padding: 2px 6px; border-radius: 4px; position: absolute; top: -5px; right: -30px;
+        
+        .hero-logo {
+            max-width: 220px;
+            height: auto;
+            margin: 0 auto 30px auto;
+            display: block;
         }
 
         #services { background-color: var(--soft-blue); border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
@@ -126,7 +130,20 @@
         .service-card h3 { color: var(--deep-blue); }
         .card-icon { font-size: 2.2rem; margin-bottom: 12px; }
 
-        #about { background-color: var(--deep-blue); color: var(--white); text-align: center; padding-top: 100px; padding-bottom: 100px; }
+        /* NEW GALLERY SECTION */
+        #gallery { background-color: var(--white); text-align: center; padding-top: 60px; padding-bottom: 60px; }
+        .gallery-grid {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+            padding: 10px 0; -webkit-overflow-scrolling: touch;
+            width: calc(100% + 40px); margin-left: -20px; padding-left: 20px; padding-right: 20px;
+        }
+        .gallery-grid::-webkit-scrollbar { display: none; }
+        .gallery-img {
+            flex: 0 0 80%; scroll-snap-align: center; height: 220px; object-fit: cover;
+            border-radius: 10px; border: 2px solid var(--black); box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        #about { background-color: var(--deep-blue); color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 100px; border-top: 2px solid var(--black);}
         #about h2 { color: var(--white); margin-bottom: 20px;}
         #about p { color: rgba(255,255,255,0.9); font-size: 1rem;}
         .toti-profile { position: relative; margin: 0 auto 35px auto; display: inline-block; }
@@ -136,7 +153,7 @@
             border: 3px solid var(--orange); border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%; z-index: 1;
         }
 
-        #booking { background-color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 120px; }
+        #booking { background-color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 120px; border-top: 2px solid var(--black);}
         #booking .ws-scribble { bottom: 20px; top: auto; left: 50%; transform: translateX(-50%) rotate(-5deg); opacity: 0.1; width: 200px;}
 
         /* --- STICKY BOTTOM NAV --- */
@@ -177,12 +194,12 @@
         <section id="hero">
             <div class="scribble-wrapper"><div class="ws-scribble"></div></div>
             
-            <div class="logo-wrap reveal active">
-                <div class="logo">Jungle Slide</div>
+            <div class="reveal active">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/logo%20uncle%20go.png" alt="Jungle Slide BK Logo" class="hero-logo">
             </div>
             
             <div class="reveal active">
-                <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&auto=format&fit=crop" alt="Surfing Batu Karas" class="img-fluid scribble-border">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/main%20photo%20jungle%20slide%20bk.jpeg" alt="Surfing Batu Karas" class="img-fluid scribble-border">
                 
                 <h1>Your <span class="highlight">Batu Karas</span> Adventure.</h1>
                 <p>Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real ocean vibe.</p>
@@ -238,10 +255,23 @@
             </div>
         </section>
 
+        <section id="gallery">
+            <div class="reveal">
+                <h2>The Vibe</h2>
+                <p>Catch a glimpse of the real Batu Karas experience.</p>
+            </div>
+            
+            <div class="gallery-grid reveal">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%202.jpeg" alt="Jungle Slide BK Vibe" class="gallery-img">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%203.jpeg" alt="Jungle Slide BK Vibe" class="gallery-img">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%204.jpeg" alt="Jungle Slide BK Vibe" class="gallery-img">
+            </div>
+        </section>
+
         <section id="about">
             <div class="reveal">
                 <div class="toti-profile">
-                    <img src="https://images.unsplash.com/photo-1544776856-42fb53c072c6?q=80&w=500&auto=format&fit=crop" alt="Uncle Toti" class="toti-img">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk.jpeg" alt="Uncle Toti" class="toti-img">
                     <div class="toti-frame"></div>
                 </div>
                 <h2>Meet Uncle Toti.</h2>
