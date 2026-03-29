@@ -17,7 +17,7 @@
             --deep-blue: #003366; 
             --soft-blue: #E8F1F8; 
             --orange: #FF6B00; 
-            --deep-orange: #E65100; /* New variable for Hero background */
+            --deep-orange: #E65100; 
             --font-main: 'Inter', sans-serif;
             --transition-speed: 0.6s;
         }
@@ -46,7 +46,7 @@
 
         .ws-scribble {
             position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%23FFFFFF" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain; /* Changed stroke to white for Deep Orange bg */
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%23FFFFFF" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain; 
             opacity: 0.2;
         }
 
@@ -56,7 +56,6 @@
             opacity: 0.15;
         }
         
-        /* New WS Scribble for booking section (blue stroke) */
         .ws-scribble-booking {
             position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%230056B3" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
@@ -90,12 +89,7 @@
             box-shadow: 3px 4px 0px var(--black); transition: all 0.1s ease;
         }
         
-        /* Modifikasi untuk tombol di hero section agar kontras dengan background deep orange */
-        #hero .btn {
-            background-color: var(--blue); /* Use blue for contrast on orange */
-            color: var(--white);
-        }
-
+        #hero .btn { background-color: var(--blue); color: var(--white); }
         .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--black); }
 
         .btn-small {
@@ -121,22 +115,11 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- SECTIONS --- */
-        
-        /* Update Hero Section */
-        #hero { 
-            background-color: var(--deep-orange); /* Deep orange background */
-            padding-top: 50px; 
-            text-align: center; 
-            color: var(--white); /* Ensure text is readable */
-        }
-        
-        /* Override heading and highlight colors for hero section */
+        #hero { background-color: var(--deep-orange); padding-top: 50px; text-align: center; color: var(--white); }
         #hero h1 { color: var(--white); }
         #hero p { color: rgba(255, 255, 255, 0.9); }
         #hero .highlight { color: var(--white); }
-        #hero .highlight::after {
-             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FFFFFF" fill="none" stroke-width="3"/></svg>') no-repeat center/contain;
-        }
+        #hero .highlight::after { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FFFFFF" fill="none" stroke-width="3"/></svg>') no-repeat center/contain; }
 
         .hero-logo { max-width: 220px; height: auto; margin: 0 auto 30px auto; display: block; }
 
@@ -154,6 +137,8 @@
         }
         .service-card h3 { color: var(--deep-blue); }
         .card-icon { font-size: 2.2rem; margin-bottom: 12px; }
+        
+        .section-subtitle { margin-top: 40px; margin-bottom: 10px; }
 
         /* GALLERY SECTION */
         #gallery { background-color: var(--white); text-align: center; padding-top: 60px; padding-bottom: 60px; }
@@ -238,16 +223,48 @@
             <div class="scribble-wrapper"><div class="turtle-scribble"></div></div>
             
             <div class="reveal">
-                <h2>Our Services</h2>
-                <p>Slide left to explore what we offer for your perfect trip.</p>
+                <h2>Surf Lessons</h2>
+                <p>Tailored lessons for your preferred riding style and skill level.</p>
             </div>
 
             <div class="services-carousel reveal">
                 <div class="service-card scribble-border">
                     <div class="card-icon">🏄🏽‍♂️</div>
+                    <h3>Shortboard Lesson</h3>
+                    <p>Learn fast, agile, and advanced maneuvers. Perfect if you want to progress to radical turns.</p>
+                    <button class="btn-small" onclick="bookService('Shortboard Lesson')">Book This</button>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="card-icon">🌊</div>
+                    <h3>Midboard Lesson</h3>
+                    <p>The perfect balance of paddle power and turning ability for steady, smooth progress.</p>
+                    <button class="btn-small" onclick="bookService('Midboard Lesson')">Book This</button>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="card-icon">🤙🏽</div>
+                    <h3>Longboard Lesson</h3>
+                    <p>Classic style and smooth rides. Ideal for beginners catching their first waves easily.</p>
+                    <button class="btn-small" onclick="bookService('Longboard Lesson')">Book This</button>
+                </div>
+            </div>
+
+            <div class="reveal section-subtitle">
+                <h2>Other Services</h2>
+                <p>Everything else you need for the perfect trip.</p>
+            </div>
+
+            <div class="services-carousel reveal">
+                <div class="service-card scribble-border">
+                    <div class="card-icon">🧭</div>
                     <h3>Surf Guide</h3>
                     <p>Find secret spots & catch the best waves tailored to your skill level.</p>
                     <button class="btn-small" onclick="bookService('Surf Guide')">Book This</button>
+                </div>
+                <div class="service-card scribble-border">
+                    <div class="card-icon">🛹</div>
+                    <h3>Surfboard Rent</h3>
+                    <p>Premium surfboards (longboards & shortboards) for all levels.</p>
+                    <button class="btn-small" onclick="bookService('Surfboard Rent')">Book This</button>
                 </div>
                 <div class="service-card scribble-border">
                     <div class="card-icon">🚗</div>
@@ -260,12 +277,6 @@
                     <h3>Bike Rent</h3>
                     <p>Explore the local beaches and coastline freely with our maintained bikes.</p>
                     <button class="btn-small" onclick="bookService('Bike Rent')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🛹</div>
-                    <h3>Surfboard Rent</h3>
-                    <p>Premium surfboards (longboards & shortboards) for all levels.</p>
-                    <button class="btn-small" onclick="bookService('Surfboard Rent')">Book This</button>
                 </div>
                 <div class="service-card scribble-border">
                     <div class="card-icon">🛫</div>
