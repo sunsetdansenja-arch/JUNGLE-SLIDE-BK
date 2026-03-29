@@ -17,6 +17,7 @@
             --deep-blue: #003366; 
             --soft-blue: #E8F1F8; 
             --orange: #FF6B00; 
+            --deep-orange: #E65100; /* New variable for Hero background */
             --font-main: 'Inter', sans-serif;
             --transition-speed: 0.6s;
         }
@@ -45,13 +46,20 @@
 
         .ws-scribble {
             position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%230056B3" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
-            opacity: 0.15;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%23FFFFFF" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain; /* Changed stroke to white for Deep Orange bg */
+            opacity: 0.2;
         }
 
         .turtle-scribble {
             position: absolute; top: 10px; left: -20px; width: 120px; height: 100px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path d="M40,10 Q60,10 70,40 Q60,70 40,70 Q20,70 10,40 Q20,10 40,10 Z M25,25 L35,35 M55,25 L45,35 M25,55 L35,45 M55,55 L45,45" stroke="%23FF6B00" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
+            opacity: 0.15;
+        }
+        
+        /* New WS Scribble for booking section (blue stroke) */
+        .ws-scribble-booking {
+            position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%230056B3" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
             opacity: 0.15;
         }
 
@@ -81,6 +89,13 @@
             cursor: pointer; width: 100%; text-align: center;
             box-shadow: 3px 4px 0px var(--black); transition: all 0.1s ease;
         }
+        
+        /* Modifikasi untuk tombol di hero section agar kontras dengan background deep orange */
+        #hero .btn {
+            background-color: var(--blue); /* Use blue for contrast on orange */
+            color: var(--white);
+        }
+
         .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--black); }
 
         .btn-small {
@@ -106,14 +121,24 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- SECTIONS --- */
-        #hero { background-color: var(--white); padding-top: 50px; text-align: center; }
         
-        .hero-logo {
-            max-width: 220px;
-            height: auto;
-            margin: 0 auto 30px auto;
-            display: block;
+        /* Update Hero Section */
+        #hero { 
+            background-color: var(--deep-orange); /* Deep orange background */
+            padding-top: 50px; 
+            text-align: center; 
+            color: var(--white); /* Ensure text is readable */
         }
+        
+        /* Override heading and highlight colors for hero section */
+        #hero h1 { color: var(--white); }
+        #hero p { color: rgba(255, 255, 255, 0.9); }
+        #hero .highlight { color: var(--white); }
+        #hero .highlight::after {
+             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FFFFFF" fill="none" stroke-width="3"/></svg>') no-repeat center/contain;
+        }
+
+        .hero-logo { max-width: 220px; height: auto; margin: 0 auto 30px auto; display: block; }
 
         #services { background-color: var(--soft-blue); border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
         .services-carousel {
@@ -130,7 +155,7 @@
         .service-card h3 { color: var(--deep-blue); }
         .card-icon { font-size: 2.2rem; margin-bottom: 12px; }
 
-        /* NEW GALLERY SECTION */
+        /* GALLERY SECTION */
         #gallery { background-color: var(--white); text-align: center; padding-top: 60px; padding-bottom: 60px; }
         .gallery-grid {
             display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
@@ -143,9 +168,10 @@
             border-radius: 10px; border: 2px solid var(--black); box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
         }
 
+        /* ABOUT SECTION */
         #about { background-color: var(--deep-blue); color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 100px; border-top: 2px solid var(--black);}
         #about h2 { color: var(--white); margin-bottom: 20px;}
-        #about p { color: rgba(255,255,255,0.9); font-size: 1rem;}
+        #about p { color: rgba(255,255,255,0.9); font-size: 1rem; margin-bottom: 15px;}
         .toti-profile { position: relative; margin: 0 auto 35px auto; display: inline-block; }
         .toti-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); position: relative; z-index: 2; }
         .toti-frame {
@@ -153,8 +179,9 @@
             border: 3px solid var(--orange); border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%; z-index: 1;
         }
 
+        /* BOOKING SECTION */
         #booking { background-color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 120px; border-top: 2px solid var(--black);}
-        #booking .ws-scribble { bottom: 20px; top: auto; left: 50%; transform: translateX(-50%) rotate(-5deg); opacity: 0.1; width: 200px;}
+        #booking .ws-scribble-booking { bottom: 20px; top: auto; left: 50%; transform: translateX(-50%) rotate(-5deg); opacity: 0.1; width: 200px;}
 
         /* --- STICKY BOTTOM NAV --- */
         .bottom-nav {
@@ -199,7 +226,7 @@
             </div>
             
             <div class="reveal active">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/main%20photo%20jungle%20slide%20bk.jpeg" alt="Surfing Batu Karas" class="img-fluid scribble-border">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk.jpeg" alt="Surfing Batu Karas" class="img-fluid scribble-border">
                 
                 <h1>Your <span class="highlight">Batu Karas</span> Adventure.</h1>
                 <p>Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real ocean vibe.</p>
@@ -271,17 +298,18 @@
         <section id="about">
             <div class="reveal">
                 <div class="toti-profile">
-                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk.jpeg" alt="Uncle Toti" class="toti-img">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/main%20photo%20jungle%20slide%20bk.jpeg" alt="Uncle Toti" class="toti-img">
                     <div class="toti-frame"></div>
                 </div>
                 <h2>Meet Uncle Toti.</h2>
-                <p>Jungle Slide BK isn't just a service; it's a piece of Batu Karas history. Founded and run by Uncle Toti, a local surfing legend, we are dedicated to providing an authentic experience.</p>
-                <p>With years of showing travelers the magic of our beaches, Toti ensures safety, fun, and true Indonesian hospitality.</p>
+                <p>Hello everyone! I'm Toti, Your local Batukaras guide!</p>
+                <p>If you're planning a trip or already here, consider me your go-to person! I'm ready to help with anything you need in Batukaras and offer the very best to make your experience unforgettable.</p>
+                <p>From accommodations, hidden spots, surfing lessons/surf guiding, or local tips I have the answers.</p>
             </div>
         </section>
 
         <section id="booking">
-            <div class="scribble-wrapper"><div class="ws-scribble"></div></div>
+            <div class="scribble-wrapper"><div class="ws-scribble-booking"></div></div>
             
             <div class="reveal">
                 <h2>Ready to Slide?</h2>
@@ -334,7 +362,7 @@
         window.addEventListener('scroll', reveal);
         reveal(); // Trigger on load
 
-        // --- DYNAMIC WHATSAPP ROUTING (ENGLISH VERSION) ---
+        // --- DYNAMIC WHATSAPP ROUTING ---
         function bookService(serviceName) {
             const phoneNumber = "6282315738183";
             let message = "";
