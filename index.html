@@ -3,377 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jungle Slide BK - Batu Karas Adventure</title>
+    <title>Jungle Slide BK — Batu Karas Adventure</title>
     
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/logo%20uncle.jpg">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --white: #FFFFFF;
-            --black: #121212;
-            --blue: #0056B3; 
-            --deep-blue: #003366; 
-            --soft-blue: #E8F1F8; 
-            --orange: #FF6B00; 
-            --deep-orange: #E65100; 
-            --font-main: 'Inter', sans-serif;
-            --transition-speed: 0.6s;
-        }
-
-        html, body {
-            margin: 0; padding: 0; width: 100%; max-width: 100vw;
-            overflow-x: hidden; 
-            font-family: var(--font-main);
-            background-color: var(--white);
-            color: var(--black);
-            scroll-behavior: smooth;
-        }
-
-        body {
-            padding-bottom: 80px; 
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        * { box-sizing: border-box; }
-
-        /* --- ARTISTIC ELEMENTS --- */
-        .scribble-wrapper {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; pointer-events: none; z-index: 0;
-        }
-
-        .ws-scribble {
-            position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%23FFFFFF" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain; 
-            opacity: 0.2;
-        }
-
-        .turtle-scribble {
-            position: absolute; top: 10px; left: -20px; width: 120px; height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><path d="M40,10 Q60,10 70,40 Q60,70 40,70 Q20,70 10,40 Q20,10 40,10 Z M25,25 L35,35 M55,25 L45,35 M25,55 L35,45 M55,55 L45,45" stroke="%23FF6B00" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
-            opacity: 0.15;
-        }
-        
-        .ws-scribble-booking {
-            position: absolute; top: 5%; right: -20px; width: 180px; height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><path d="M10,30 Q30,10 50,30 T90,30 Q70,50 50,30 T10,30 Z M30,25 Q35,20 40,25 M60,25 Q65,20 70,25" stroke="%230056B3" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>') no-repeat center/contain;
-            opacity: 0.15;
-        }
-
-        .scribble-border {
-            border: 2px solid var(--black);
-            border-radius: 15px 5px 15px 5px / 5px 15px 5px 15px;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        h1 { font-size: 2.2rem; font-weight: 800; color: var(--blue); line-height: 1.2; margin-bottom: 12px; }
-        h2 { font-size: 1.8rem; font-weight: 800; color: var(--blue); margin-bottom: 15px; }
-        h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--black); }
-        p { font-size: 0.95rem; color: #444; margin-bottom: 20px; }
-        
-        .highlight { color: var(--orange); position: relative; display: inline-block; }
-        .highlight::after {
-            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 6px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FF6B00" fill="none" stroke-width="3"/></svg>') no-repeat center/contain;
-        }
-
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-block; padding: 16px 32px; background-color: var(--orange);
-            color: var(--white); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-            font-size: 0.95rem; position: relative; z-index: 1;
-            border: 2px solid var(--black); border-radius: 50px 20px 50px 20px / 20px 50px 20px 50px;
-            cursor: pointer; width: 100%; text-align: center;
-            box-shadow: 3px 4px 0px var(--black); transition: all 0.1s ease;
-        }
-        
-        #hero .btn { background-color: var(--blue); color: var(--white); }
-        .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--black); }
-
-        .btn-small {
-            display: inline-block; margin-top: auto; padding: 12px 20px; background-color: transparent;
-            color: var(--blue); font-weight: 700; font-size: 0.85rem; cursor: pointer;
-            border: 2px solid var(--blue); border-radius: 20px 5px 20px 5px / 5px 20px 5px 20px;
-            width: 100%; transition: all 0.2s ease;
-        }
-        .btn-small:hover, .btn-small:active { background-color: var(--blue); color: var(--white); }
-
-        /* --- LAYOUT UTILITIES --- */
-        section {
-            padding: 80px 20px; position: relative; display: flex; flex-direction: column;
-            justify-content: center; overflow: hidden;
-        }
-        
-        .img-fluid {
-            width: 100%; height: 260px; object-fit: cover; border-radius: 10px;
-            margin-bottom: 25px; border: 2px solid var(--black); box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-        }
-
-        .reveal { opacity: 0; transform: translateY(20px); transition: all var(--transition-speed) ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- SECTIONS --- */
-        #hero { background-color: var(--deep-orange); padding-top: 50px; text-align: center; color: var(--white); }
-        #hero h1 { color: var(--white); }
-        #hero p { color: rgba(255, 255, 255, 0.9); }
-        #hero .highlight { color: var(--white); }
-        #hero .highlight::after { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" stroke="%23FFFFFF" fill="none" stroke-width="3"/></svg>') no-repeat center/contain; }
-
-        .hero-logo { max-width: 220px; height: auto; margin: 0 auto 30px auto; display: block; }
-
-        #services { background-color: var(--soft-blue); border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
-        .services-carousel {
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px;
-            padding: 10px 0 30px 0; -webkit-overflow-scrolling: touch;
-            width: calc(100% + 40px); margin-left: -20px; padding-left: 20px; padding-right: 20px;
-        }
-        .services-carousel::-webkit-scrollbar { display: none; }
-        .service-card {
-            flex: 0 0 85%; scroll-snap-align: center; background: var(--white); padding: 25px 20px;
-            display: flex; flex-direction: column; text-align: left; position: relative;
-            min-height: 240px; box-shadow: 3px 4px 0px rgba(0,86,179,0.15);
-        }
-        .service-card h3 { color: var(--deep-blue); }
-        .card-icon { font-size: 2.2rem; margin-bottom: 12px; }
-        
-        .section-subtitle { margin-top: 40px; margin-bottom: 10px; }
-
-        /* GALLERY SECTION */
-        #gallery { background-color: var(--white); text-align: center; padding-top: 60px; padding-bottom: 60px; }
-        .gallery-grid {
-            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
-            padding: 10px 0; -webkit-overflow-scrolling: touch;
-            width: calc(100% + 40px); margin-left: -20px; padding-left: 20px; padding-right: 20px;
-        }
-        .gallery-grid::-webkit-scrollbar { display: none; }
-        .gallery-img {
-            flex: 0 0 80%; scroll-snap-align: center; height: 220px; object-fit: cover;
-            border-radius: 10px; border: 2px solid var(--black); box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
-        }
-
-        /* ABOUT SECTION */
-        #about { background-color: var(--deep-blue); color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 100px; border-top: 2px solid var(--black);}
-        #about h2 { color: var(--white); margin-bottom: 20px;}
-        #about p { color: rgba(255,255,255,0.9); font-size: 1rem; margin-bottom: 15px;}
-        .toti-profile { position: relative; margin: 0 auto 35px auto; display: inline-block; }
-        .toti-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); position: relative; z-index: 2; }
-        .toti-frame {
-            position: absolute; top: -10px; left: -10px; width: 170px; height: 170px;
-            border: 3px solid var(--orange); border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%; z-index: 1;
-        }
-
-        /* BOOKING SECTION */
-        #booking { background-color: var(--white); text-align: center; padding-top: 80px; padding-bottom: 120px; border-top: 2px solid var(--black);}
-        #booking .ws-scribble-booking { bottom: 20px; top: auto; left: 50%; transform: translateX(-50%) rotate(-5deg); opacity: 0.1; width: 200px;}
-
-        /* --- STICKY BOTTOM NAV --- */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background-color: var(--white);
-            display: flex; justify-content: space-around; align-items: center; z-index: 100;
-            border-top: 2px solid var(--black); border-radius: 20px 20px 0 0;
-            padding-bottom: env(safe-area-inset-bottom);
-        }
-        .nav-item {
-            text-decoration: none; color: #777; font-size: 0.75rem; font-weight: 700;
-            display: flex; flex-direction: column; align-items: center; transition: color 0.2s; width: 20%;
-        }
-        .nav-item.active { color: var(--blue); }
-        .nav-icon { font-size: 1.5rem; margin-bottom: 4px; font-style: normal;}
-        .nav-cta {
-            background-color: var(--orange); color: var(--white); width: 65px; height: 65px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin-top: -40px;
-            border: 2px solid var(--black); text-decoration: none; box-shadow: 0 4px 10px rgba(255,107,0,0.4);
-            transition: transform 0.2s ease;
-        }
-        .nav-cta:active { transform: scale(0.9); }
-        .nav-cta .nav-icon { font-size: 1.8rem; margin: 0; color: white;}
-    </style>
-</head>
-<body>
-
-    <nav class="bottom-nav">
-        <a href="#hero" class="nav-item active"><i class="nav-icon">🌊</i>Home</a>
-        <a href="#services" class="nav-item"><i class="nav-icon">🛹</i>Service</a>
-        <a href="#booking" class="nav-cta" onclick="bookService('General Inquiry')"><i class="nav-icon">🤙🏽</i></a>
-        <a href="#about" class="nav-item"><i class="nav-icon">👨🏽</i>Guide</a>
-        <a href="#booking" class="nav-item"><i class="nav-icon">💬</i>Book</a>
-    </nav>
-
-    <main>
-        
-        <section id="hero">
-            <div class="scribble-wrapper"><div class="ws-scribble"></div></div>
-            
-            <div class="reveal active">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/logo%20uncle%20go.png" alt="Jungle Slide BK Logo" class="hero-logo">
-            </div>
-            
-            <div class="reveal active">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk.jpeg" alt="Surfing Batu Karas" class="img-fluid scribble-border">
-                
-                <h1>Your <span class="highlight">Batu Karas</span> Adventure.</h1>
-                <p>Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real ocean vibe.</p>
-                <button onclick="bookService('General Inquiry')" class="btn">Plan Your Trip</button>
-            </div>
-        </section>
-
-        <section id="services">
-            <div class="scribble-wrapper"><div class="turtle-scribble"></div></div>
-            
-            <div class="reveal">
-                <h2>Surf Lessons</h2>
-                <p>Tailored lessons for your preferred riding style and skill level.</p>
-            </div>
-
-            <div class="services-carousel reveal">
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🏄🏽‍♂️</div>
-                    <h3>Shortboard Lesson</h3>
-                    <p>Learn fast, agile, and advanced maneuvers. Perfect if you want to progress to radical turns.</p>
-                    <button class="btn-small" onclick="bookService('Shortboard Lesson')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🌊</div>
-                    <h3>Midboard Lesson</h3>
-                    <p>The perfect balance of paddle power and turning ability for steady, smooth progress.</p>
-                    <button class="btn-small" onclick="bookService('Midboard Lesson')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🤙🏽</div>
-                    <h3>Longboard Lesson</h3>
-                    <p>Classic style and smooth rides. Ideal for beginners catching their first waves easily.</p>
-                    <button class="btn-small" onclick="bookService('Longboard Lesson')">Book This</button>
-                </div>
-            </div>
-
-            <div class="reveal section-subtitle">
-                <h2>Other Services</h2>
-                <p>Everything else you need for the perfect trip.</p>
-            </div>
-
-            <div class="services-carousel reveal">
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🧭</div>
-                    <h3>Surf Guide</h3>
-                    <p>Find secret spots & catch the best waves tailored to your skill level.</p>
-                    <button class="btn-small" onclick="bookService('Surf Guide')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🛹</div>
-                    <h3>Surfboard Rent</h3>
-                    <p>Premium surfboards (longboards & shortboards) for all levels.</p>
-                    <button class="btn-small" onclick="bookService('Surfboard Rent')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🚗</div>
-                    <h3>Car Rent</h3>
-                    <p>Comfortable and spacious rides for group trips around the coast.</p>
-                    <button class="btn-small" onclick="bookService('Car Rent')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🛵</div>
-                    <h3>Bike Rent</h3>
-                    <p>Explore the local beaches and coastline freely with our maintained bikes.</p>
-                    <button class="btn-small" onclick="bookService('Bike Rent')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🛫</div>
-                    <h3>Airport Pick Up</h3>
-                    <p>Hassle-free and comfortable transfer directly to Batu Karas.</p>
-                    <button class="btn-small" onclick="bookService('Airport Pick Up')">Book This</button>
-                </div>
-                <div class="service-card scribble-border">
-                    <div class="card-icon">🛬</div>
-                    <h3>Airport Drop</h3>
-                    <p>Safe and on-time return from Batu Karas to your flight.</p>
-                    <button class="btn-small" onclick="bookService('Airport Drop Service')">Book This</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="gallery">
-            <div class="reveal">
-                <h2>The Vibe</h2>
-                <p>Catch a glimpse of the real Batu Karas experience.</p>
-            </div>
-            
-            <div class="gallery-grid reveal">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%202.jpeg" alt="Jungle Slide BK Vibe" class="gallery-img">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%203.jpeg" alt="Jungle Slide BK Vibe" class="gallery-img">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%204.jpeg" alt="Jungle Slide BK Vibe" class="gallery-img">
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="reveal">
-                <div class="toti-profile">
-                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/main%20photo%20jungle%20slide%20bk.jpeg" alt="Uncle Toti" class="toti-img">
-                    <div class="toti-frame"></div>
-                </div>
-                <h2>Meet Uncle Toti.</h2>
-                <p>Hello everyone! I'm Toti, Your local Batukaras guide!</p>
-                <p>If you're planning a trip or already here, consider me your go-to person! I'm ready to help with anything you need in Batukaras and offer the very best to make your experience unforgettable.</p>
-                <p>From accommodations, hidden spots, surfing lessons/surf guiding, or local tips I have the answers.</p>
-            </div>
-        </section>
-
-        <section id="booking">
-            <div class="scribble-wrapper"><div class="ws-scribble-booking"></div></div>
-            
-            <div class="reveal">
-                <h2>Ready to Slide?</h2>
-                <p>Tap below to chat directly with <span class="highlight">Uncle Toti</span> on WhatsApp. Plan your trip, ask questions, or secure your booking instantly.</p>
-                <br>
-                <button onclick="bookService('General Inquiry')" class="btn">Chat on WhatsApp</button>
-            </div>
-        </section>
-
-    </main>
-
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
     <script>
-        // --- UX: Active Nav State on Scroll ---
-        const sections = document.querySelectorAll('section');
-        const navItems = document.querySelectorAll('.bottom-nav .nav-item');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const scrollY = window.pageYOffset + 150; 
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href') === `#${current}`) {
-                    item.classList.add('active');
-                }
-            });
-        });
-
-        // --- UX: Scroll Reveal Animation ---
-        function reveal() {
-            const reveals = document.querySelectorAll('.reveal');
-            for (let i = 0; i < reveals.length; i++) {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 50; 
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        voyenOrange: '#FF5A1F',
+                        voyenCream: '#FBF9F1',
+                        voyenDark: '#1D1D1F',
+                        voyenMuted: '#6E6E73',
+                        voyenBlue: '#0056B3'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
                 }
             }
         }
-        window.addEventListener('scroll', reveal);
-        reveal(); // Trigger on load
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FBF9F1;
+            color: #1D1D1F;
+        }
+        .font-serif-premium {
+            font-family: 'Playfair Display', serif;
+        }
+        .hairline-border {
+            border: 1px solid rgba(29, 29, 31, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden pb-20">
 
-        // --- DYNAMIC WHATSAPP ROUTING ---
+    <!-- TOP HEADER BAR -->
+    <header class="w-full py-4 px-6 md:px-12 bg-[#FBF9F1] hairline-border border-b flex justify-between items-center text-xs uppercase tracking-widest font-medium">
+        <div>JUNGLE SLIDE BK</div>
+        <div class="hidden md:block">BATU KARAS SURF & GUIDING EXPERIENCE</div>
+        <div>EST. 2026</div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative w-full hairline-border border-b bg-[#FBF9F1] px-6 md:px-12 pt-12 pb-20 flex flex-col justify-between">
+        <div class="relative w-full z-10">
+            <div class="mb-6">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/logo%20uncle%20go.png" alt="Jungle Slide BK Logo" class="h-20 md:h-28 object-contain">
+            </div>
+            <h1 class="font-serif-premium text-[10vw] md:text-[7.5vw] font-black leading-none tracking-tight uppercase text-voyenDark select-none relative">
+                Your Batu <span class="italic font-normal text-voyenOrange lowercase">Karas</span><br>
+                <div class="flex items-center justify-between">
+                    <span>Adventure.</span>
+                    <span class="text-xs uppercase tracking-widest font-sans font-bold text-voyenOrange bg-white px-4 py-2 rounded-full border border-voyenOrange rotate-[-4deg] hidden md:inline-block">AUTHENTIC OCEAN VIBE</span>
+                </div>
+            </h1>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mt-12 items-end">
+            <div class="md:col-span-4 text-xs tracking-wider text-voyenMuted uppercase max-w-sm">
+                Authentic surf trips, hassle-free rentals, and local guiding with Uncle Toti. Experience the real ocean vibe in Batu Karas.
+            </div>
+            
+            <!-- HERO IMAGE CONTAINER -->
+            <div class="md:col-span-5 relative h-64 md:h-80 w-full rounded-2xl overflow-hidden shadow-sm group hairline-border">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk.jpeg" alt="Surfing Batu Karas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/30 flex flex-col justify-between p-6">
+                    <span class="text-[10px] text-white tracking-widest uppercase bg-voyenOrange/90 self-start px-2.5 py-1 rounded">Batu Karas Spot</span>
+                    <span class="font-serif-premium text-white text-2xl italic drop-shadow-md">Slide into the local rhythm.</span>
+                </div>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col justify-end gap-4">
+                <button onclick="bookService('General Inquiry')" class="w-full py-4 bg-voyenDark hover:bg-voyenOrange text-white font-bold text-center uppercase tracking-wider text-xs rounded-full transition-all shadow-md">
+                    Plan Your Trip
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SERVICES -->
+    <section id="services" class="w-full py-20 px-6 md:px-12 hairline-border border-b bg-white">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- SURF LESSONS HEADER -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold text-voyenOrange uppercase tracking-widest">Coaching & Training</span>
+                    <h2 class="font-serif-premium text-4xl md:text-5xl font-bold mt-2">Surf Lessons</h2>
+                </div>
+                <p class="text-xs tracking-wider uppercase text-voyenMuted max-w-xs">
+                    Tailored lessons for your preferred riding style and skill level.
+                </p>
+            </div>
+
+            <!-- LESSONS GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+                <!-- SHORTBOARD -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🏄🏽‍♂️</span>
+                        <h3 class="font-serif-premium text-2xl font-bold mb-2">Shortboard Lesson</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Learn fast, agile, and advanced maneuvers. Perfect if you want to progress to radical turns.</p>
+                    </div>
+                    <button onclick="bookService('Shortboard Lesson')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This Service
+                    </button>
+                </div>
+
+                <!-- MIDBOARD -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🌊</span>
+                        <h3 class="font-serif-premium text-2xl font-bold mb-2">Midboard Lesson</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">The perfect balance of paddle power and turning ability for steady, smooth progress.</p>
+                    </div>
+                    <button onclick="bookService('Midboard Lesson')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This Service
+                    </button>
+                </div>
+
+                <!-- LONGBOARD -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🤙🏽</span>
+                        <h3 class="font-serif-premium text-2xl font-bold mb-2">Longboard Lesson</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Classic style and smooth rides. Ideal for beginners catching their first waves easily.</p>
+                    </div>
+                    <button onclick="bookService('Longboard Lesson')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This Service
+                    </button>
+                </div>
+            </div>
+
+            <!-- OTHER SERVICES HEADER -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6 border-t pt-16">
+                <div>
+                    <span class="text-xs font-bold text-voyenOrange uppercase tracking-widest">Rentals & Transport</span>
+                    <h2 class="font-serif-premium text-4xl md:text-5xl font-bold mt-2">Other Services</h2>
+                </div>
+                <p class="text-xs tracking-wider uppercase text-voyenMuted max-w-xs">
+                    Everything else you need for the perfect Batu Karas trip.
+                </p>
+            </div>
+
+            <!-- OTHER SERVICES GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- SURF GUIDE -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🧭</span>
+                        <h3 class="font-serif-premium text-xl font-bold mb-2">Surf Guide</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Find secret spots & catch the best waves tailored to your skill level.</p>
+                    </div>
+                    <button onclick="bookService('Surf Guide')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This
+                    </button>
+                </div>
+
+                <!-- SURFBOARD RENT -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🛹</span>
+                        <h3 class="font-serif-premium text-xl font-bold mb-2">Surfboard Rent</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Premium surfboards (longboards & shortboards) for all levels.</p>
+                    </div>
+                    <button onclick="bookService('Surfboard Rent')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This
+                    </button>
+                </div>
+
+                <!-- CAR RENT -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🚗</span>
+                        <h3 class="font-serif-premium text-xl font-bold mb-2">Car Rent</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Comfortable and spacious rides for group trips around the coast.</p>
+                    </div>
+                    <button onclick="bookService('Car Rent')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This
+                    </button>
+                </div>
+
+                <!-- BIKE RENT -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🛵</span>
+                        <h3 class="font-serif-premium text-xl font-bold mb-2">Bike Rent</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Explore the local beaches and coastline freely with our maintained bikes.</p>
+                    </div>
+                    <button onclick="bookService('Bike Rent')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This
+                    </button>
+                </div>
+
+                <!-- AIRPORT PICK UP -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🛫</span>
+                        <h3 class="font-serif-premium text-xl font-bold mb-2">Airport Pick Up</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Hassle-free and comfortable transfer directly to Batu Karas.</p>
+                    </div>
+                    <button onclick="bookService('Airport Pick Up')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This
+                    </button>
+                </div>
+
+                <!-- AIRPORT DROP -->
+                <div class="bg-[#FBF9F1] p-6 rounded-3xl hairline-border flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl mb-4 block">🛬</span>
+                        <h3 class="font-serif-premium text-xl font-bold mb-2">Airport Drop</h3>
+                        <p class="text-xs text-voyenMuted leading-relaxed">Safe and on-time return from Batu Karas to your flight.</p>
+                    </div>
+                    <button onclick="bookService('Airport Drop Service')" class="w-full mt-6 py-3 bg-white hover:bg-voyenDark hover:text-white rounded-full font-bold text-xs uppercase tracking-wider border border-voyenDark transition-all">
+                        Book This
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="w-full py-20 px-6 md:px-12 hairline-border border-b bg-[#FBF9F1]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-voyenOrange uppercase tracking-widest">Visual Atmosphere</span>
+                <h2 class="font-serif-premium text-4xl md:text-5xl font-bold mt-2">The Vibe</h2>
+                <p class="text-xs tracking-wider uppercase text-voyenMuted mt-2">Catch a glimpse of the real Batu Karas experience.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="h-64 rounded-2xl overflow-hidden hairline-border shadow-sm group">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%202.jpeg" alt="Jungle Slide BK Vibe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="h-64 rounded-2xl overflow-hidden hairline-border shadow-sm group">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%203.jpeg" alt="Jungle Slide BK Vibe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="h-64 rounded-2xl overflow-hidden hairline-border shadow-sm group">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/support%20photo%20jungle%20slide%20bk%204.jpeg" alt="Jungle Slide BK Vibe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="w-full py-20 px-6 md:px-12 bg-voyenDark text-voyenCream hairline-border border-b">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="relative w-36 h-36 mx-auto mb-8 rounded-full overflow-hidden border-4 border-voyenOrange p-1">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/main%20photo%20jungle%20slide%20bk.jpeg" alt="Uncle Toti" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-xs font-bold text-voyenOrange uppercase tracking-widest">Your Host & Local Guide</span>
+            <h2 class="font-serif-premium text-4xl md:text-5xl font-bold mt-2 text-white mb-6">Meet Uncle Toti.</h2>
+            <p class="text-sm text-voyenMuted leading-relaxed max-w-2xl mx-auto mb-4">
+                Hello everyone! I'm Toti, Your local Batukaras guide!
+            </p>
+            <p class="text-sm text-voyenCream leading-relaxed max-w-2xl mx-auto mb-4">
+                If you're planning a trip or already here, consider me your go-to person! I'm ready to help with anything you need in Batukaras and offer the very best to make your experience unforgettable.
+            </p>
+            <p class="text-xs text-voyenMuted uppercase tracking-widest mt-6">
+                Accommodations • Hidden Spots • Surfing Lessons • Surf Guiding • Local Tips
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION KHUSUS BIKE RENT -->
+    <section id="bike-rent" class="w-full py-20 px-6 md:px-12 bg-white hairline-border border-b">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-[#FBF9F1] p-8 md:p-12 rounded-3xl hairline-border flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/JUNGLE-SLIDE-BK/main/bike_png.png" alt="Bike Rental Batu Karas" class="max-h-56 object-contain drop-shadow-lg">
+                </div>
+                <div class="w-full md:w-1/2 space-y-4">
+                    <span class="text-xs font-bold text-voyenOrange uppercase tracking-widest">On Demand Transport</span>
+                    <h2 class="font-serif-premium text-3xl md:text-4xl font-bold">Explore Batu Karas On Two Wheels</h2>
+                    <p class="text-xs text-voyenMuted leading-relaxed">
+                        Rent a reliable bike to cruise around the coast, surf spots, and local village spots with ease. Well-maintained motorbikes equipped with surf racks upon request.
+                    </p>
+                    <button onclick="bookService('Bike Rent')" class="px-8 py-4 bg-voyenDark hover:bg-voyenOrange text-white font-bold text-xs uppercase tracking-wider rounded-full transition-all">
+                        Rent a Bike Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section id="booking" class="w-full py-20 px-6 md:px-12 bg-[#FBF9F1] text-center">
+        <div class="max-w-2xl mx-auto space-y-6">
+            <span class="text-xs font-bold text-voyenOrange uppercase tracking-widest">Get In Touch</span>
+            <h2 class="font-serif-premium text-4xl md:text-5xl font-bold">Ready to Slide?</h2>
+            <p class="text-xs text-voyenMuted leading-relaxed">
+                Tap below to chat directly with <span class="font-bold text-voyenDark">Uncle Toti</span> on WhatsApp. Plan your trip, ask questions, or secure your booking instantly.
+            </p>
+            <div class="pt-4">
+                <button onclick="bookService('General Inquiry')" class="w-full md:w-auto px-10 py-5 bg-voyenOrange text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-voyenDark transition-all shadow-lg flex items-center justify-center gap-2 mx-auto">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Chat on WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-voyenDark text-voyenCream py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 text-xs tracking-wider uppercase border-t border-white/10">
+        <div class="space-y-2">
+            <h3 class="font-serif-premium text-2xl font-bold tracking-normal text-white lowercase">jungle slide bk.</h3>
+            <p class="text-voyenMuted">WhatsApp Customer Service: +62 823-1573-8183</p>
+        </div>
+        <div class="text-voyenMuted md:text-right">
+            <p>&copy; 2026 JUNGLE SLIDE BK. ALL RIGHTS RESERVED.</p>
+            <p class="mt-1 text-[10px]">BATU KARAS • PANGANDARAN • INDONESIA</p>
+        </div>
+    </footer>
+
+    <!-- STICKY BOTTOM NAV -->
+    <nav class="fixed bottom-0 left-0 w-full h-16 bg-white border-t hairline-border flex justify-around items-center z-50 text-[10px] uppercase font-bold tracking-widest">
+        <a href="#hero" class="flex flex-col items-center text-voyenDark hover:text-voyenOrange">
+            <i class="fa-solid fa-water text-base mb-0.5"></i>
+            Home
+        </a>
+        <a href="#services" class="flex flex-col items-center text-voyenMuted hover:text-voyenOrange">
+            <i class="fa-solid fa-icons text-base mb-0.5"></i>
+            Service
+        </a>
+        <a href="#booking" onclick="bookService('General Inquiry')" class="w-12 h-12 rounded-full bg-voyenOrange text-white flex items-center justify-center -mt-6 border-2 border-white shadow-lg">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+        </a>
+        <a href="#about" class="flex flex-col items-center text-voyenMuted hover:text-voyenOrange">
+            <i class="fa-solid fa-user-compass text-base mb-0.5"></i>
+            Guide
+        </a>
+        <a href="#booking" class="flex flex-col items-center text-voyenMuted hover:text-voyenOrange">
+            <i class="fa-solid fa-calendar-check text-base mb-0.5"></i>
+            Book
+        </a>
+    </nav>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // DYNAMIC WHATSAPP ROUTING
         function bookService(serviceName) {
             const phoneNumber = "6282315738183";
             let message = "";
